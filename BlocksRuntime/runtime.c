@@ -23,12 +23,21 @@
  */
 
 #include "Block_private.h"
-#include <stdio.h>
+/* #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <string.h> */
 #include <stdint.h>
+#include <stddef.h>
 
 #include "config.h"
+
+void* malloc(unsigned long s);
+void free(void* ptr);
+int printf_(const char*, ...);
+#define printf printf_
+int sprintf(char* restrict, const char* restrict, ...);
+#define memmove(a, b, c) __builtin_memmove(a, b, c)
+#define exit(a) do { if (a != 0) { __builtin_trap(); } } while (0)
 
 #ifdef HAVE_AVAILABILITY_MACROS_H
 #include <AvailabilityMacros.h>
